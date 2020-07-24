@@ -30,7 +30,7 @@
 
     <script>
 
-        document.getElementById('addItem').addEventListener('click', event=> {
+        document.getElementById('addItem').addEventListener('click', event => {
             event.preventDefault()
             let itemElem = document.createElement('li')
             itemElem.className = 'todo'
@@ -38,6 +38,14 @@
             document.getElementById('items').append(itemElem)
             document.getElementById('item').value = ''
         })
+
+        document.addEventListener('click', event => {
+            //console.log(event.target)
+            if (event.target.className === 'todo') { //set the condition to target a specific target, here it's todo
+                console.log('Clicked a todo')
+            }
+        })
+
     
     </script>
 
