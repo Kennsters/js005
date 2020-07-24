@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <h1 id="count">10</h1>
+
+
+    <script>
+        //amount of seconds to start
+        let count = 10
+
+        //interval to decrement amount of time by one second each second
+        let myInterval = setInterval (() => {
+            //moves count down by 1
+            count--
+            //displays time left on screen
+            document.getElementById('count').textContent = count
+
+
+            //if we are out of time we do the following
+            if (count <= 0) {
+                alert('Time is up!')
+                //stops the interval from running
+                clearInterval(myInterval)
+            }
+        }, 1000)
+
+        // setTimeout(() => {
+        //     console.log('hi')
+        // }, 5000)
+
+        let randNum = 12
+
+        while (randNum % 2 === 0) {
+            console.log(randNum)
+            randNum = Math.floor(Math.random() * 100)
+        }
+
+
+        
+
+
+
+    </script>
+
+</body>
+</html>

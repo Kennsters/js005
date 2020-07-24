@@ -35,11 +35,15 @@
 
     <script>
 
+        //grabbing elements from the ul and turns into an array in the local storage or leave empty for us to add onto the array
         let items = JSON.parse(localStorage.getItem('items')) || []
 
+        //
         for (let i = 0; i < items.length; i++) {
-            let itemElem = document.createElement('li')
 
+            //tags each element with the li tag
+            let itemElem = document.createElement('li')
+            
             itemElem.dataset.item = items[i].text
 
             if (items[i].isDone) {
@@ -55,6 +59,8 @@
             `
             document.getElementById('items').append(itemElem)
         }
+
+
 
         document.getElementById('addItem').addEventListener('click', event => {
             event.preventDefault()
