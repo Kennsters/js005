@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+    <style>
+
+        .green {
+            color: green;
+        }
+
+    </style>
+
+<body>
+    
+
+    <form>
+
+        <p>
+            <label for="item">Enter Movie Title</label>
+            <input type="input" name="item" id="item">
+        </p>
+
+        <p>
+            <button id="addItem">Add to List</button>
+        </p>
+
+    </form>
+
+    <ol id="items"></ol>
+
+
+    <script>
+
+        document.getElementById('addItem').addEventListener('click', event => {
+            event.preventDefault()
+            let itemElem = document.createElement('li')
+            itemElem.className = 'movieName'
+            itemElem.innerHTML = `
+                ${document.getElementById('item').value}
+                <button class="delete">X</button>
+            `
+            document.getElementById('items').append(itemElem)
+            document.getElementById('item').value = ''
+        })
+
+        document.addEventListener('click', event => {
+            //console.log(event.target)
+            if (event.target.classList.contains('movieName')) { //set the condition to target a specific target, here it's todo
+                //console.log(event.target.classList.contains('todo')) // .contains checks to see if the specific targest has the classlist of what it is in contains, prints out boolean
+                if (event.target.classList.contains('green')) {
+                    event.target.classList.remove('green')
+                } else {
+                    event.target.classList.add('green')
+                } 
+            } else if (event.target.classList.contains('delete')) {
+                event.target.parentNode.remove()
+            }
+
+        })
+
+
+    </script>
+
+
+
+</body>
+</html>

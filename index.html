@@ -25,7 +25,7 @@
         </p> 
 
         <p>
-            <button id="addItem">Add Item</button>
+            <button id="addItem" data-somethingwhateveridontknow = "">Add Item</button>
         </p>
 
     </form>
@@ -35,9 +35,40 @@
 
     <script>
 
+        let items = JSON.parse(localStorage.getItem('items')) || []
+
+        for (let i = 0; i < items.length; i++) {
+            let itemElem = document.createElement('li')
+
+            itemElem.dataset.item = items[i].text
+
+            if (items[i].isDone) {
+                itemElem.className = 'todo green'
+            } else {
+                itemElem.className = 'todo'
+            }
+            
+            itemElem.classname = 'todo'
+            itemElem.innerHTML = `
+                ${items[i].text}
+                <button class="delete">x</button>
+            `
+            document.getElementById('items').append(itemElem)
+        }
+
         document.getElementById('addItem').addEventListener('click', event => {
             event.preventDefault()
+    
+            let itemObj = {
+                text: document.getElementById('item').value,
+                //its false because you add items onto the list because you HAVENT done them yet//
+                isDone: false
+            }
+            items.push(itemObj)
+            localStorage.setItem('items', JSON.stringify(items))
+
             let itemElem = document.createElement('li')
+            itemElem.dataset.item = document.getElementById('item').value
             itemElem.className = 'todo'
             // itemElem.textContent = document.getElementById('item').value
             itemElem.innerHTML = `
@@ -48,9 +79,21 @@
             document.getElementById('item').value = ''
         })
 
+
+        //clicking on screen
         document.addEventListener('click', event => {
             //console.log(event.target)
             if (event.target.classList.contains('todo')) { //set the condition to target a specific target, here it's todo
+                console.log(event.target.dataset.item)
+
+                for(let i = 0; i < items.length; i++) {
+                    if (items[i].text === event.target.dataset.item) {
+                        items[i].isDone = !items[i].isDone
+                    }
+                }
+
+                localStorage.setItem('items', JSON.stringify(items))
+
                 //console.log(event.target.classList.contains('todo')) // .contains checks to see if the specific targest has the classlist of what it is in contains, prints out boolean
                 if (event.target.classList.contains('green')) {
                     event.target.classList.remove('green')
@@ -63,8 +106,7 @@
 
         })
 
-        
-
+    
     
     </script>
 
